@@ -61,11 +61,13 @@ const App = () => {
 
       setOrder(incomingOrder);
 
-      refreshCart();
+      // refreshCart();
     } catch (error) {
       setErrorMessage(error.data.error.message);
     }
   };
+
+  console.log(order);
 
   useEffect(() => {
     fetchProducts();
@@ -94,6 +96,7 @@ const App = () => {
               order={order}
               onCaptureCheckout={handleCaptureCheckout}
               error={errorMessage}
+              refreshCart={refreshCart}
             />
           </Route>
         </Switch>

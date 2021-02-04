@@ -17,6 +17,8 @@ const PaymentForm = ({
   backStep,
   onCaptureCheckout,
   nextStep,
+  refreshCart,
+  timeout,
 }) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
@@ -61,6 +63,12 @@ const PaymentForm = ({
 
       onCaptureCheckout(checkoutToken.id, orderData);
 
+      // Since thisis dummy and we can not send a post request if dont provide a credit card in commerce.js
+      // function refresh cart on app.js directly call here, feel free to remove it if you privided a credit card
+      refreshCart();
+
+      timeout();
+
       nextStep();
     }
   };
@@ -71,6 +79,9 @@ const PaymentForm = ({
       <Divider />
       <Typography variant='h6' gutterBottom style={{ margin: '20px 0' }}>
         Payment Method
+      </Typography>
+      <Typography variant='subtitle2' gutterBottom style={{ margin: '20px 0' }}>
+        *Demo only, keep typing 4242..... until the end for using stripe demo
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
